@@ -12,10 +12,11 @@ namespace MyFPS
         public GameObject actionUi;
         public TextMeshProUGUI actionText;
         [SerializeField] private string action = "Press E to Open";
+        public GameObject extraCross;
 
         //action
         private Animator animator;
-        private Collider collide;
+        private Collider m_collide;
         public AudioSource audioSource;
         // private bool isOpen = false;
         #endregion
@@ -23,7 +24,7 @@ namespace MyFPS
         void Start()
         {
             animator = GetComponent<Animator>();
-            collide = GetComponent<Collider>();
+            m_collide = GetComponent<Collider>();
         }
 
         void Update()
@@ -46,13 +47,14 @@ namespace MyFPS
             {
                 actionUi.SetActive(true);
                 actionText.text = action;
+                extraCross.SetActive(true);
 
                 if(Input.GetButtonDown("Action")/*&& isOpen == false)*/)
                 {
                     HideActionUI();
 
                     animator.SetBool("isOpen", true);
-                    collide.enabled = false;
+                    m_collide.enabled = false;
                     audioSource.Play();
 
                     //도어 열림
@@ -80,6 +82,7 @@ namespace MyFPS
         {
             actionUi.SetActive(false);
             actionText.text = "";
+            extraCross.SetActive(false);
         }
 
         //마우스가 벗어나면 액션 UI를 숨긴다
