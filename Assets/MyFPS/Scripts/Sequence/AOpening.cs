@@ -8,9 +8,11 @@ namespace MyFPS
     {
         #region Variables
         [SerializeField] private GameObject thePlayer;
-        [SerializeField] private TextMeshProUGUI textBox;
-        [SerializeField] private string scenarioText1 = "I need get out of here...";
         public SceneFader fader;
+
+        //시퀀스 UI
+        [SerializeField] private TextMeshProUGUI textBox;
+        private string scenarioText1 = "I need get out of here...";
         #endregion
         void Start()
         {
@@ -33,7 +35,7 @@ namespace MyFPS
 
             // 4. 3초후에 시나리오 텍스트 사라짐
             yield return new WaitForSeconds(3f);
-            // textBox.text = "";
+            textBox.text = "";
             textBox.gameObject.SetActive(false);
 
             // 5. 플레이어 캐릭터 활성화
