@@ -19,6 +19,8 @@ namespace MyFPS
         //action
         public GameObject realPistol;
         public GameObject arrow;
+
+        public GameObject enemyTrigger;
         #endregion
 
         // void Update()
@@ -57,6 +59,10 @@ namespace MyFPS
         {
             realPistol.SetActive(true);
             arrow.SetActive(false);
+
+            //EnemyTrigger 활성화
+            enemyTrigger.SetActive(true);
+
             Destroy(this.gameObject);
         }
 
