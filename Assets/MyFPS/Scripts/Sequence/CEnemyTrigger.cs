@@ -29,7 +29,7 @@ namespace MyFPS
         IEnumerator PlaySequence()
         {
             //콜라이더 비활성화 중복 방지
-            this.GetComponent<BoxCollider>().enabled = false;
+            // this.GetComponent<BoxCollider>().enabled = false;
 
             //문 열기
             theDoor.GetComponent<Animator>().SetBool("IsOpen", true);
@@ -44,6 +44,9 @@ namespace MyFPS
 
             //Enemy 등장 사운드
             jumpScare.Play();
+
+            //트리거 킬
+            Destroy(this.gameObject);
 
             yield return null;
         }
