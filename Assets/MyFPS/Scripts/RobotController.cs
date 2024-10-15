@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Timeline;
 
 namespace MyFPS
 {
@@ -14,31 +13,42 @@ namespace MyFPS
     }
     public class RobotController : MonoBehaviour
     {
-        private Animator animator;
+        public Animator animator;
         //로봇 현재 상태
         private RobotState currentState;
         //로봇 이전 상태 
         private RobotState beforeState;
-        //체력
-         [SerializeField] private float startHealth = 20;
+        //Enemy Stats
+        [SerializeField] private float startHealth = 20;
+        public float health;
+        [SerializeField] private float moveSpeed = 3f;
+        [SerializeField] private float attackDamage = 5f;
+        [SerializeField] private float attackRange = 1.5f;
+        [SerializeField] private float attackDelay = 2f;
+
+
         // public GameObject theRobot;  
-        // public Transform target;
-        // private float moveSpeed = 3f;
-        // private bool isMoving = false;
-        // private bool isAttacking = false;
+        public Transform target;
+        private bool isMoving = false;
+        private bool isAttacking = false;
         void Awake()
         {
             //참조
-            animator = GetComponent<Animator>();
+            // animator = GetComponent<Animator>();
+            
             //초기 상태 설정
             SetState(RobotState.R_Idle);
+
+            health = startHealth;
 
             // currentState = RobotState.R_Idle;
             // animator.SetInteger("RobotState", 0);
 
             // currentState = RobotState.R_Walk;
             // animator.SetInteger("RobotState", 1);
+
         }
+        
 
         private void SetState(RobotState newState)
         {
@@ -52,54 +62,79 @@ namespace MyFPS
             animator.SetInteger("RobotState", (int)newState);
         }
 
-//         void OnEnable()
-//         {
-//             StartCoroutine(PlaySequence());
-//         }
+        public void TakeDamage(float damage)
+        {
+            health -= damage;
+            if(health <= 0)
+            {
+                StartCoroutine(Die());
+            }
+        }
 
-//         IEnumerator PlaySequence()
-//         {
-//             // Debug.Log("RobotController.PlaySequence()");
-//             yield return new WaitForSeconds(2f);
-//             animator.SetInteger("RobotState", 1);
-//             isMoving = true;
-//         }
+        IEnumerator Die()
+        {
+            SetState(RobotState.R_Death);
+            yield return new WaitForSeconds(3f);
+            Destroy(this.gameObject);
+        }
+
+
+
+        void OnEnable()
+        {
+            StartCoroutine(PlaySequence());
+        }
+
+        IEnumerator PlaySequence()
+        {
+            // Debug.Log("RobotController.PlaySequence()");
+            yield return new WaitForSeconds(2f);
+            SetState(RobotState.R_Walk);
+            isMoving = true;
+        }
+
         
-//         void Update()
-//         {
-//             if (isMoving && !isAttacking)
-//             {
-//                 Move();
-//             }
-//         }
+        void Update()
+        {
+            if (isMoving)
+            {
+                Move();
+            }
+        }
 
-//         void Move()
-//         {
-//             if(isMoving)
-//             {
-//                 Vector3 dir = target.position - this.gameObject.transform.position;
-//                 Quaternion quaternion = Quaternion.LookRotation(dir);
-//                 transform.rotation = Quaternion.Slerp(transform.rotation, quaternion, 0.1f);
-//                 transform.Translate(dir.normalized * moveSpeed * Time.deltaTime, Space.World); 
+        void Move()
+        {
+            if(isMoving)
+            {
+                Vector3 dir = target.transform.position - this.gameObject.transform.position;
+                Quaternion quaternion = Quaternion.LookRotation(dir);
+                transform.rotation = Quaternion.Slerp(transform.rotation, quaternion, 0.1f);
+                transform.Translate(dir.normalized * moveSpeed * Time.deltaTime, Space.World); 
 
-//                 if(dir.magnitude < 3f)
-//                 {
-//                     StartCoroutine(Attack());
-//                 }
-//             }
-//         }
+                if(dir.magnitude < 3f)
+                {
+                    StartCoroutine(Attack(target));
+                }
+            }
+        }
 
-//         IEnumerator Attack()
-//         {
-//             isMoving = false;
-//             isAttacking = true;
-//             animator.SetInteger("RobotState", 2);
-//             yield return new WaitForSeconds(2f);
-//             isAttacking = false;
-//             StartCoroutine(PlaySequence());
-//         }
-//     }
+        IEnumerator Attack(Transform target)
+        {
+            isAttacking = true;
+            isMoving = false;
+            SetState(RobotState.R_Attack);
 
-// }
+            Vector3 dir = target.transform.position - this.gameObject.transform.position;
+            if(dir.magnitude < attackRange)
+            {
+                PlayerCasting playerCasting = target.GetComponent<Collider>().GetComponent<PlayerCasting>();
+            }
+
+            
+            yield return new WaitForSeconds(1f);
+            isAttacking = false;
+            StartCoroutine(PlaySequence());
+
+        }
     }
 }

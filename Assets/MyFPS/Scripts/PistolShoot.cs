@@ -11,12 +11,16 @@ namespace MyFPS
         public ParticleSystem muzzleEffect;
 
         public AudioSource pistolShot;
-        // public Transform theCamera;
+        public Transform theCamera;  
         public Transform firePoint;
 
         //총알 발사 속도
         [SerializeField]private float fireDelay = 0.5f;
+
+        [SerializeField] private float damage = 5f;
         private bool isFire = false;
+
+        
 
 
         #endregion
@@ -43,9 +47,17 @@ namespace MyFPS
             //내 앞에 100 안에 적이 있으면 적에게 데미지를 준다
             float maxDistance = 100f;
             RaycastHit hit;
-            if(Physics.Raycast(firePoint.position, firePoint.TransformDirection(Vector3.forward), out hit, maxDistance))
+            if(Physics.Raycast(theCamera.position, theCamera.TransformDirection(Vector3.forward), out hit, maxDistance))
             {
-                Debug.Log(hit.transform.name);
+                //적에게 데미지를 준다
+                RobotController robotController = hit.collider.GetComponent<RobotController>();
+
+                if(robotController != null)
+                {
+                    robotController.TakeDamage(damage);
+                    Debug.Log(robotController.health);
+                }
+                Debug.Log(hit.transform.name);  
             }
 
         

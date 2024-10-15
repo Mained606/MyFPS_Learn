@@ -646,8 +646,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muzzleEffect: {fileID: 2075923811}
   pistolShot: {fileID: 2144729161}
+  theCamera: {fileID: 26401864604659169}
   firePoint: {fileID: 613203781}
   fireDelay: 0.5
+  damage: 5
 --- !u!1 &230142405
 GameObject:
   m_ObjectHideFlags: 0
@@ -21176,6 +21178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toTarget: 0
+  health: 20
 --- !u!1 &91099415585727708
 GameObject:
   m_ObjectHideFlags: 0
@@ -21266,6 +21269,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 632076378164967807}
+  - component: {fileID: 632076378164967809}
   - component: {fileID: 632076378164967808}
   m_Layer: 0
   m_Name: Robot
@@ -21726,7 +21730,7 @@ Transform:
   m_GameObject: {fileID: 371062926546651217}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.375, z: -3.36}
+  m_LocalPosition: {x: 0, y: 1.875, z: -3.36}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21904,7 +21908,7 @@ Transform:
   m_GameObject: {fileID: 256219956671177669}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -18.42, y: 0.378, z: 20}
+  m_LocalPosition: {x: -18.42, y: 0.5, z: 20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -21912,7 +21916,30 @@ Transform:
   - {fileID: 5291036448408138291}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &632076378164967808
+--- !u!136 &632076378164967808
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256219956671177669}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.2946509
+  m_Height: 1.7330087
+  m_Direction: 1
+  m_Center: {x: -0.022111118, y: 0.9357801, z: 9.217333e-17}
+--- !u!114 &632076378164967809
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -21924,7 +21951,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92e655d7ccbe41a458547bd2d0ad1f24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 5291036448408138292}
   startHealth: 20
+  health: 0
+  moveSpeed: 3
+  attackDamage: 5
+  attackRange: 1.5
+  attackDelay: 2
+  target: {fileID: 5035032914961534471}
 --- !u!4 &669381453611830561
 Transform:
   m_ObjectHideFlags: 0
@@ -23230,7 +23264,7 @@ Transform:
   m_GameObject: {fileID: 5668861427484382397}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -3.36}
+  m_LocalPosition: {x: 0, y: 0.5, z: -3.36}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -23755,7 +23789,7 @@ Transform:
   m_GameObject: {fileID: 6347563300266498657}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.375, z: -3.36}
+  m_LocalPosition: {x: 0, y: 1.875, z: -3.36}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
