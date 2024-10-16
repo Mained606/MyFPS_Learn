@@ -16,6 +16,12 @@ namespace MyFPS
 
         // private bool isTrigger = false;
         #endregion
+
+        void Start()
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
         private void OnTriggerEnter(Collider other)
         {
             StartCoroutine(PlaySequence());

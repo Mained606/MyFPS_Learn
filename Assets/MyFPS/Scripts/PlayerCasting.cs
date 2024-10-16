@@ -13,7 +13,7 @@ namespace MyFPS
         public static float distanceFormTarget;
         [SerializeField] private float toTarget; //거리 숫자 보기(임시)
 
-        public float health = 20f;
+        // public float health = 20f;
 
         #endregion
         void Update()
@@ -35,21 +35,21 @@ namespace MyFPS
         }
 
 
-        public void TakeDamage(float damage)
-        {
-            health -= damage;
-            if(health <= 0)
-            {
-                StartCoroutine(Die());
-            }
-        }
+        // public void TakeDamage(float damage)
+        // {
+        //     health -= damage;
+        //     if(health <= 0)
+        //     {
+        //         StartCoroutine(Die());
+        //     }
+        // }
 
-        IEnumerator Die()
-        {
-            Debug.Log("사망하였습니다.");
-            Destroy(gameObject);
-            yield return null;
-        }
+        // IEnumerator Die()
+        // {
+        //     Debug.Log("사망하였습니다.");
+        //     Destroy(gameObject);
+        //     yield return null;
+        // }
 
         // Gizmo 그리기 : 카메라 위치에서 앞에 충돌체까지 레이저 쏘는 선 그리기
         void OnDrawGizmosSelected()

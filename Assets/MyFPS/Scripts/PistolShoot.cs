@@ -50,12 +50,13 @@ namespace MyFPS
             if(Physics.Raycast(theCamera.position, theCamera.TransformDirection(Vector3.forward), out hit, maxDistance))
             {
                 //적에게 데미지를 준다
-                RobotController robotController = hit.collider.GetComponent<RobotController>();
+                // RobotController robotController = hit.collider.GetComponent<RobotController>();
+                RobotController robotController = hit.transform.GetComponent<RobotController>();
 
                 if(robotController != null)
                 {
                     robotController.TakeDamage(damage);
-                    Debug.Log(robotController.health);
+                    Debug.Log(robotController.currentHealth);
                 }
                 Debug.Log(hit.transform.name);  
             }
