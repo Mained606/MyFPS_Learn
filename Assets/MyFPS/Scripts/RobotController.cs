@@ -12,8 +12,9 @@ namespace MyFPS
         R_Attack,
         R_Death
     }
-    public class RobotController : MonoBehaviour
+    public class RobotController : MonoBehaviour, IDamageable
     {
+        #region Variables
         private Animator animator;
         //로봇 현재 상태
         private RobotState currentState;
@@ -33,11 +34,12 @@ namespace MyFPS
 
         // public GameObject theRobot;  
         public GameObject target;
-        private bool isMoving = false;
-        private bool isAttacking = false;
+        // private bool isMoving = false;
+        // private bool isAttacking = false;
         private bool isDead = false;
 
         public float attackDelayTime;
+        #endregion
         void Awake()
         {
             //참조
@@ -104,11 +106,17 @@ namespace MyFPS
 
         private void Attack()
         {
-            PlayerController player = target.GetComponent<PlayerController>();
-            if(player != null)
+            IDamageable damageable = target.GetComponent<IDamageable>();
+            if(damageable != null)
             {
-                player.TakeDamage(attackDamage);
+                damageable.TakeDamage(attackDamage);
             }
+
+            // PlayerController player = target.GetComponent<PlayerController>();
+            // if(player != null)
+            // {
+            //     player.TakeDamage(attackDamage);
+            // }
         }
 
 

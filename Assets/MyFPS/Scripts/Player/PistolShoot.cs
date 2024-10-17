@@ -9,6 +9,7 @@ namespace MyFPS
         #region Variables
         private Animator animator;
         public ParticleSystem muzzleEffect;
+        public GameObject hitImpactPrefab;
 
         public AudioSource pistolShot;
         public Transform theCamera;  
@@ -20,7 +21,7 @@ namespace MyFPS
         [SerializeField] private float damage = 5f;
         private bool isFire = false;
 
-        
+        [SerializeField] private float impactForce = 2f;
 
 
         #endregion
@@ -36,7 +37,10 @@ namespace MyFPS
             //마우스 왼쪽 버튼 클릭 시 발사
             if(Input.GetButtonDown("Fire") && !isFire)
             {
-                StartCoroutine(Shoot());
+                if(PlayerStats.Instance.UseAmmo(1) == true)
+                {
+                    StartCoroutine(Shoot());
+                }
             }
 
         }
@@ -47,18 +51,35 @@ namespace MyFPS
             //내 앞에 100 안에 적이 있으면 적에게 데미지를 준다
             float maxDistance = 100f;
             RaycastHit hit;
-            if(Physics.Raycast(theCamera.position, theCamera.TransformDirection(Vector3.forward), out hit, maxDistance))
+            if(Physics.Raycast(firePoint.position, firePoint.TransformDirection(Vector3.forward), out hit, maxDistance))
             {
-                //적에게 데미지를 준다
-                // RobotController robotController = hit.collider.GetComponent<RobotController>();
-                RobotController robotController = hit.transform.GetComponent<RobotController>();
 
-                if(robotController != null)
-                {
-                    robotController.TakeDamage(damage);
-                    Debug.Log(robotController.currentHealth);
-                }
                 Debug.Log(hit.transform.name);  
+
+                //총알 탄피 이펙트 생성
+                GameObject impactGO = Instantiate(hitImpactPrefab, hit.point, Quaternion.LookRotation(hit.normal));
+                Destroy(impactGO, 2f);
+
+                // 적 넉백 효과 적용
+                if(hit.rigidbody != null)
+                {
+                    hit.rigidbody.AddForce(-hit.normal * impactForce);
+                }
+
+                //적에게 데미지를 준다
+                IDamageable damageable = hit.transform.GetComponent<IDamageable>();
+                if(damageable != null)
+                {
+                    damageable.TakeDamage(damage);
+                }
+
+                // RobotController robotController = hit.transform.GetComponent<RobotController>();
+
+                // if(robotController != null)
+                // {
+                //     robotController.TakeDamage(damage);
+                //     Debug.Log(robotController.currentHealth);
+                // }
             }
 
         

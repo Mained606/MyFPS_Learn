@@ -6,6 +6,7 @@ namespace MyFPS
     //인터렉티브 액션을 구현하는 클래스
     public abstract class Interactive : MonoBehaviour
     {
+        #region Variables
         protected abstract void DoAction();
 
         // 공통 변수
@@ -14,7 +15,9 @@ namespace MyFPS
         public TextMeshProUGUI actionText;
         [SerializeField] private string action = "Action Text";
         public GameObject extraCross;
-
+        public GameObject crossHair;
+        public GameObject pistolCross;
+        #endregion
         // 공통 메서드
 
         void Update()

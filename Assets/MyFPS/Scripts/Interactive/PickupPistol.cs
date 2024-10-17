@@ -21,6 +21,10 @@ namespace MyFPS
         public GameObject arrow;
 
         public GameObject enemyTrigger;
+
+        public GameObject ammoUi;
+        public GameObject ammoBox;
+
         #endregion
 
         // void Update()
@@ -58,7 +62,13 @@ namespace MyFPS
         protected override void DoAction()
         {
             realPistol.SetActive(true);
+            crossHair.SetActive(false);
+            pistolCross.SetActive(true);
             arrow.SetActive(false);
+
+            //AmmoUi 활성화
+            ammoUi.SetActive(true);
+            ammoBox.SetActive(true);
 
             //EnemyTrigger 활성화
             enemyTrigger.SetActive(true);

@@ -21,6 +21,8 @@ namespace MyFPS
 
         public void Retry()
         {
+            //탄약 수 초기화
+            PlayerStats.Instance.ResetAmmo();
             fader.FadeTo(loadToScene);
         }
 
