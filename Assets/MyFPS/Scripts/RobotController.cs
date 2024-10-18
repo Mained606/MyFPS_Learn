@@ -39,6 +39,11 @@ namespace MyFPS
         private bool isDead = false;
 
         public float attackDelayTime;
+
+        //배경음
+        public AudioSource bgm01;
+        public AudioSource bgm02;
+
         #endregion
         void Awake()
         {
@@ -89,9 +94,16 @@ namespace MyFPS
         {
             isDead = true;
             SetState(RobotState.R_Death);
-            yield return new WaitForSeconds(3f);
-            Destroy(this.gameObject);
+            yield return new WaitForSeconds(2f);
+
+            bgm02.Stop();
+            bgm01.Play();
+
+
+            transform.GetComponent<CapsuleCollider>().enabled = false;
         }
+
+        
 
         // private void AttackTimer()
         // {

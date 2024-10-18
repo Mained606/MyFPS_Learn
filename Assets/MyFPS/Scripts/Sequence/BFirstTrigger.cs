@@ -1,3 +1,4 @@
+using StarterAssets;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -13,6 +14,7 @@ namespace MyFPS
         //시퀀스 UI
         [SerializeField] private TextMeshProUGUI textBoxText;
         public string scenarioText = "Looks like a weapon on that table";
+        [SerializeField] private AudioSource voice3;
 
         // private bool isTrigger = false;
         #endregion
@@ -39,10 +41,13 @@ namespace MyFPS
             // isTrigger = true;
 
             //플레이어 캐릭터 비활성화
-            thePlayer.gameObject.SetActive(false);
+            //thePlayer.gameObject.SetActive(false);
+            thePlayer.GetComponent<FirstPersonController>().enabled = false;
+
 
             //대사 출력
             textBoxText.gameObject.SetActive(true);
+            voice3.Play();
             textBoxText.text = scenarioText;
 
             //1초 딜레이
@@ -58,11 +63,15 @@ namespace MyFPS
             textBoxText.text = "";
             textBoxText.gameObject.SetActive(false);
 
+            thePlayer.GetComponent<FirstPersonController>().enabled = true;
+
             //충돌 비활성화
-            gameObject.GetComponent<BoxCollider>().enabled = false;
-            
+            //gameObject.GetComponent<BoxCollider>().enabled = false;
+            Destroy(gameObject);
+
             //플레이 캐릭터 활성화(다시 플레이)
-            thePlayer.gameObject.SetActive(true);
+            //thePlayer.gameObject.SetActive(true);
+
 
         }
     }

@@ -10,12 +10,14 @@ namespace MyFPS
         #region Variables
 
         // public GameObject doorUi;
-        public static float distanceFormTarget;
+        public static float distanceFormTarget = Mathf.Infinity;
         [SerializeField] private float toTarget; //거리 숫자 보기(임시)
 
         // public float health = 20f;
 
         #endregion
+
+
         void Update()
         {
             RaycastHit hit;

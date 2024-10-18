@@ -8,10 +8,14 @@ namespace MyFPS
     public class CEnemyTrigger : MonoBehaviour
     {
         #region Variables
+
+   
         public GameObject theDoor; //문
-        public GameObject theRobot; //로봇
         public AudioSource doorBang; //문 열리는 소리
-        public AudioSource jumpScare; //점프 스크어 소리
+
+        public GameObject theRobot; //로봇
+        public AudioSource bgm01;
+        public AudioSource bgm02; //점프 스크어 소리
 
 
         #endregion
@@ -35,7 +39,10 @@ namespace MyFPS
             theDoor.GetComponent<Animator>().SetBool("IsOpen", true);
             theDoor.GetComponent<BoxCollider>().enabled = false;
 
+
+
             //문 사운드
+            bgm01.Stop();
             doorBang.Play();
 
             //Enemy 활성화
@@ -43,7 +50,7 @@ namespace MyFPS
             yield return new WaitForSeconds(1f);
 
             //Enemy 등장 사운드
-            jumpScare.Play();
+            bgm02.Play();
 
             //Enemy 걷기
             RobotController robot = theRobot.GetComponent<RobotController>();

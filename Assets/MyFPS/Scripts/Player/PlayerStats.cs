@@ -15,6 +15,10 @@ namespace MyFPS
             get { return ammoCount; }
             set { ammoCount = value; }
         }
+
+        //[SerializeField] private GameObject pauseUI;
+        ////토글
+        //private bool uiCheck = false;
         
         #endregion
 
@@ -22,6 +26,20 @@ namespace MyFPS
         {
             AmmoCount = 0;
         }
+
+        //void Update()
+        //{
+        //    if (Input.GetKeyDown(KeyCode.P))
+        //    {
+        //        Toggle();
+        //    }
+        //}
+
+        //void Toggle()
+        //{
+        //    uiCheck = !uiCheck;
+        //    pauseUI.SetActive(uiCheck);
+        //}
 
         public void AddAmmo(int amount)
         {
