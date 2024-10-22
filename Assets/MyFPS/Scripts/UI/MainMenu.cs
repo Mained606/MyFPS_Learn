@@ -8,15 +8,25 @@ namespace MyFPS
         #region Variables
         public SceneFader fader;
         [SerializeField] private string loadToScene = "MainScene01";
+
+        private AudioManager audioManager;
         #endregion
         private void Start()
         {
+            //씬 페이드 인 효과
             fader.FromFade(0.5f);
+            //참조
+            audioManager = AudioManager.Instance;
+            //BGM 플레이
+            audioManager.PlayBgm("MainBgm");
         }
 
         public void NewGame()
         {
+            audioManager.Stop(audioManager.BgmSound);
+            audioManager.Play("MenuButton");
             fader.FadeTo(loadToScene);
+
         }
 
         public void LoadGame()
@@ -26,6 +36,7 @@ namespace MyFPS
 
         public void Options()
         {
+            audioManager.PlayBgm("MenuBgm2");
             Debug.Log("옵션 화면");
         }
 
