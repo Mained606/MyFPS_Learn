@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using StarterAssets;
-using Unity.VisualScripting;
 
 namespace MyFPS
 {
@@ -11,6 +10,8 @@ namespace MyFPS
         #region Variables
         public GameObject pauseUi;
         private GameObject thePlayer;
+        public SceneFader fader;
+        [SerializeField] private string loadToScene = "MainMenu";
         #endregion
 
         void Start()
@@ -50,8 +51,12 @@ namespace MyFPS
 
         public void Menu()
         {
-            Debug.Log("메뉴로 이동");
             Time.timeScale = 1;
+
+            //씬 종료 처리
+            // Debug.Log("메뉴로 이동");
+            // AudioManager.Instance.StopBgm();
+            fader.FadeTo(loadToScene);
         }
 
         public void Contiune()

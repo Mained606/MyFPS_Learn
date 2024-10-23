@@ -1,3 +1,4 @@
+using MyFPS;
 using UnityEngine;
 
 namespace MyFPS

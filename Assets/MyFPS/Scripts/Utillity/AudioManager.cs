@@ -112,6 +112,11 @@ namespace MyFPS
             // sound.source?.Play();
             sound.source.Play();
         }
+        public void StopBgm()
+        {
+            Stop(bgmSound);
+        }
     }
+
 
 }
