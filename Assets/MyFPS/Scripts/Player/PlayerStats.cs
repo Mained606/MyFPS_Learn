@@ -4,6 +4,15 @@ using UnityEngine;
 using TMPro;
 namespace MyFPS
 {
+
+    //퍼즐 아이템 획득 여부
+
+    public enum PuzzleKey
+    {
+        ROOM01_KEY,
+        MAX_KEY //퍼즐 아이템 갯수
+    }
+
     //플레이어의 속성값을 관리하는 (싱글톤, DontDestroyOnLoad) 클래스 .. Ammo
     public class PlayerStats : PersistentSingleton<PlayerStats>
     {
@@ -15,6 +24,15 @@ namespace MyFPS
             get { return ammoCount; }
             set { ammoCount = value; }
         }
+        private bool[] puzzleKeys;
+
+        //프로퍼티로 히든 키 조건 추가
+        // [SerializeField] private bool hiddenKey;
+        // public bool HiddenKey
+        // {
+        //     get { return hiddenKey; }
+        //     set { hiddenKey = value; }
+        // }
 
         //[SerializeField] private GameObject pauseUI;
         ////토글
@@ -25,6 +43,7 @@ namespace MyFPS
         void Start()
         {
             AmmoCount = 0;
+            puzzleKeys = new bool[(int)PuzzleKey.MAX_KEY];
         }
 
         //void Update()
@@ -64,6 +83,25 @@ namespace MyFPS
         public void ResetAmmo()
         {
             AmmoCount = 0;
+        }
+
+        //퍼즐 아이템 획득
+        public void AcquirePuzzleItem(PuzzleKey key)
+        {
+            puzzleKeys[(int)key] = true;
+        }
+
+        //프로퍼티 사용시 AddKey
+        // public bool AddKey(bool amount)
+        // {
+        //     HiddenKey = amount;
+        //     return HiddenKey;
+        // }
+
+        //퍼즐 아이템 소지 여부
+        public bool HasPuzzleItem(PuzzleKey key)
+        {
+            return puzzleKeys[(int)key];
         }
 
 

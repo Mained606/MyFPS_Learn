@@ -17,6 +17,9 @@ namespace MyFPS
         public GameObject extraCross;
         public GameObject crossHair;
         public GameObject pistolCross;
+
+        //
+        protected bool unInteractive = false;
         #endregion
         // 공통 메서드
 
@@ -28,7 +31,7 @@ namespace MyFPS
         void OnMouseOver()
         {
             //거리가 2이하 일 때
-            if (theDistance <= 2f)
+            if (theDistance <= 2f && !unInteractive)
             {
                 ShowActionUi(action);
 

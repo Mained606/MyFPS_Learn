@@ -57,3 +57,27 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: PlayBgm
+    clip: {fileID: 8300000, guid: 89de1ea63db01a847b36546adccba6f7, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: DoorLocked
+    clip: {fileID: 8300000, guid: 970000b026b45204790af8e28deef690, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PotterySmash
+    clip: {fileID: 8300000, guid: 053bd923c19599540b190d8dd4ea84f8, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CreakyDoor
+    clip: {fileID: 8300000, guid: f9d11ec936d2fc04f9bebc9ab0d2bc02, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
