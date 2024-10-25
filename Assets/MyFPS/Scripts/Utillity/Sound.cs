@@ -19,6 +19,7 @@ namespace MyFPS
         public bool loop; // 반복 재생
         [HideInInspector]
         public AudioSource source; //음원을 재생할 오디오 소스
+
     }
 
 }
