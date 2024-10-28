@@ -21,7 +21,6 @@ namespace MyFPS
         protected override void DoAction()
         {
             StartCoroutine(GainPuzzleItem());
-            
         }
 
         IEnumerator GainPuzzleItem()

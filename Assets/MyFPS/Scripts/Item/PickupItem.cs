@@ -30,7 +30,7 @@ namespace MyFPS
             transform.Rotate(Vector3.up, rotateSpeed * Time.deltaTime, Space.World);
         }
 
-        private void OnTriggerEnter(Collider other)
+        protected virtual void OnTriggerEnter(Collider other)
         {
             //플레이어 체크
             if(other.tag == "Player")
