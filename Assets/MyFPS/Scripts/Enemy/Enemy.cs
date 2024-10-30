@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UIElements;
 
 namespace MyFPS
 {
@@ -21,7 +20,7 @@ namespace MyFPS
         private Animator animator;
         private UnityEngine.AI.NavMeshAgent agent;
 
-        private EnemyState currentState;
+        public EnemyState CurrentState { get; private set; }
         private EnemyState beforeState;
 
         [SerializeField] private float maxHealth = 100f;
@@ -37,6 +36,15 @@ namespace MyFPS
         private int nowWayPoint = 0;
 
         private Vector3 startPosition;
+
+        //적 감지
+        private bool isAiming;
+        public bool IsAiming
+        {
+            get { return isAiming; }
+            private set { isAiming = value; }
+        }
+        [SerializeField] private float chaseRange = 20f;
         #endregion
 
         void Start()
@@ -68,12 +76,34 @@ namespace MyFPS
             // Vector3 dir = thePlayer.transform.position - this.gameObject.transform.position;
 
             float distance = Vector3.Distance(thePlayer.transform.position, this.gameObject.transform.position);
-            if(distance <= attackRange)
+
+            if (chaseRange > 0)
+            {
+                IsAiming = distance <= chaseRange;
+            }
+
+            if (distance <= attackRange)
             {
                 SetState(EnemyState.E_Attack);
             }
+            else if (chaseRange > 0)
+            {
+                if(IsAiming)
+                {
+                    SetState(EnemyState.E_Chase);
+                }
+            }
 
-            switch(currentState)
+            //if(distance <= chaseRange)
+            //{
+            //    SetState(EnemyState.E_Chase);
+            //}
+            //else
+            //{
+            //    SetState(EnemyState.E_Walk);
+            //}
+
+            switch(CurrentState)
             {
                 case EnemyState.E_Idle:
                     break;
@@ -102,20 +132,29 @@ namespace MyFPS
                 case EnemyState.E_Death:
                     break;
                 case EnemyState.E_Chase:
+                    if(chaseRange > 0 && !IsAiming)
+                    {
+                        GoStartPosition();
+                        return;
+                    }
+
                     //플레이어 위치 업데이트
                     agent.SetDestination(thePlayer.position);
+
                     break;                                        
             }
         }
 
         public void SetState(EnemyState newState)
         {
-            if(currentState == newState)
+            if(IsDeath)
+                return;
+            if(CurrentState == newState)
                 return;
             //이전 상태 저장
-            beforeState = currentState;
+            beforeState = CurrentState;
             //현재 상태 저장
-            currentState = newState;
+            CurrentState = newState;
             //애니메이션 상태 변경
             if(newState == EnemyState.E_Chase)
             {
@@ -153,11 +192,14 @@ namespace MyFPS
 
         private void Die()
         {
+            SetState(EnemyState.E_Death);
+            
             IsDeath = true;
 
-            SetState(EnemyState.E_Death);
-
             transform.GetComponent<BoxCollider>().enabled = false;
+
+            //킬 효과
+            Destroy(this.gameObject, 3f);
         }
 
         private void GoNextPoint()
@@ -168,6 +210,23 @@ namespace MyFPS
                 nowWayPoint = 0;
             }
             agent.SetDestination(wayPoints[nowWayPoint].position);
+        }
+
+        public void GoStartPosition()
+        {
+            if(IsDeath)
+                return;
+
+            SetState(EnemyState.E_Walk);
+
+            nowWayPoint = 0;
+            agent.SetDestination(startPosition);
+        }
+
+        void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, chaseRange);
         }
 
     }

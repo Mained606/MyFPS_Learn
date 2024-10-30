@@ -2,40 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 namespace MyFPS
 {
-    public class GEnemyZoneInTrigger : MonoBehaviour
+    public class HEnemyZoneOutTirgger : MonoBehaviour
     {
-        #region Variables
         public Transform theGunMan;
-        public GameObject enemyZoneOut; //아웃 트리거
-        #endregion
+        public GameObject enemyZoneIn; //인 트리거
+
         private void OnTriggerEnter(Collider other)
         {
-            //건맨 추격 시작
-
+            //건맨 추격 종료
             if(other.tag == "Player")
             {
                 if(theGunMan != null)
                 {
-                    theGunMan.GetComponent<Enemy>().SetState(EnemyState.E_Chase);
+                    theGunMan.GetComponent<Enemy>().GoStartPosition();
                 }
             }
             
             // if(other.tag == "Player" && 
             // theGunMan.GetComponent<Enemy>().CurrentState != EnemyState.E_Death)
             // {
-            //     theGunMan.GetComponent<Enemy>().SetState(EnemyState.E_Chase);
+            //     //건맨 추격 종료 위치 재설정
+            //     theGunMan.GetComponent<Enemy>().GoStartPosition();
             // }
         }
-
         private void OnTriggerExit(Collider other)
         {
             if(other.tag == "Player")
             {
                 this.gameObject.SetActive(false);
-                enemyZoneOut.SetActive(true);
+                enemyZoneIn.SetActive(true);
             }
         }
     }
+
 }

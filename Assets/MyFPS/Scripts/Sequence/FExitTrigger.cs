@@ -8,7 +8,7 @@ namespace MyFPS
     {
         #region Variables
         public SceneFader fader;
-        [SerializeField] private string loadToSecne = "MainMenu";
+        [SerializeField] private string loadToScene = "MainMenu";
         #endregion
         private void OnTriggerEnter(Collider other)
         {
@@ -20,9 +20,17 @@ namespace MyFPS
 
         void PlaySequence()
         {
-            fader.FadeTo(loadToSecne);
+            //씬 클리어 처리
+            //배경음 종료
+            AudioManager.Instance.StopBgm();
+
+            //씬 클리어 보상, 데이터 처리
+            //...
+
+            //메인 메뉴로 이동
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            fader.FadeTo(loadToScene);
         }
     }
 
