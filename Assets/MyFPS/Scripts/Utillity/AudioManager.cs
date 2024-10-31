@@ -1,5 +1,5 @@
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace MyFPS
 {
@@ -13,6 +13,8 @@ namespace MyFPS
             get { return bgmSound; }
         }
 
+        public AudioMixer audioMixer;
+
         #endregion
 
         protected override void Awake()
@@ -20,14 +22,27 @@ namespace MyFPS
             //싱글톤 구현부
             base.Awake();
 
+            //AudioMixer 그룹 찾아오기
+            AudioMixerGroup[] audioMixerGroups = audioMixer.FindMatchingGroups("Master");
+
             //AudioManager 초기화
             foreach (var sound in sounds)
             {
                 sound.source = this.gameObject.AddComponent<AudioSource>();
+
                 sound.source.clip = sound.clip;
                 sound.source.loop = sound.loop;
                 sound.source.volume = sound.volume;
                 sound.source.pitch = sound.pitch;
+
+                if(sound.loop)
+                {
+                    sound.source.outputAudioMixerGroup = audioMixerGroups[1];
+                }
+                else
+                {
+                    sound.source.outputAudioMixerGroup = audioMixerGroups[2];
+                }
                 
             }
         }
@@ -117,6 +132,4 @@ namespace MyFPS
             Stop(bgmSound);
         }
     }
-
-
 }
