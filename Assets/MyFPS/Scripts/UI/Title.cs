@@ -1,25 +1,21 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace MyFPS
 {
     public class Title : MonoBehaviour
     {
         #region Variables
-
         public SceneFader fader;
         [SerializeField] private string loadToScene = "MainMenu";
         public GameObject anyKeyUI;
         private bool isAnyKey = false;
-
         #endregion
+
         void Start()
         {
             fader.FromFade();
-
             isAnyKey = false;
-
             StartCoroutine(TitleProcess());
         }
 
@@ -33,8 +29,6 @@ namespace MyFPS
 
         IEnumerator TitleProcess()
         {
-
-
             yield return new WaitForSeconds(4f);
             isAnyKey = true;
             anyKeyUI.SetActive(true);
@@ -48,6 +42,5 @@ namespace MyFPS
             StopAllCoroutines();
             fader.FadeTo(loadToScene);
         }
-
     }
 }

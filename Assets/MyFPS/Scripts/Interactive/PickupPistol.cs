@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 namespace MyFPS
@@ -8,6 +5,16 @@ namespace MyFPS
     public class PickupPistol : Interactive
     {
         #region Variables
+
+        //action
+        public GameObject realPistol;
+        public GameObject arrow;
+        public GameObject enemyTrigger;
+        public GameObject ammoUi;
+        public GameObject ammoBox;
+
+        // ===============================================
+        // 다른 방법 시도 후 삭제한 코드
         // private float theDistance;
 
         //action Ui
@@ -15,18 +22,36 @@ namespace MyFPS
         // public TextMeshProUGUI actionText;
         // public GameObject extraCross;
         // [SerializeField] private string action = "Puckup Pistol";
-
-        //action
-        public GameObject realPistol;
-        public GameObject arrow;
-
-        public GameObject enemyTrigger;
-
-        public GameObject ammoUi;
-        public GameObject ammoBox;
-
+        // ===============================================
         #endregion
 
+
+        protected override void DoAction()
+        {
+            arrow.SetActive(false);
+            ammoBox.SetActive(true);
+            //플레이어 무기 획득 셋팅
+            PlayerStats.Instance.SetHasWeapon(true);
+            
+            //AmmoUi 활성화
+            ammoUi.SetActive(true);
+
+            //실제 무기 활성화
+            realPistol.SetActive(true);
+
+            //크로스 헤어 체인지
+            crossHair.SetActive(false);
+            pistolCross.SetActive(true);
+
+            //EnemyTrigger 활성화
+            enemyTrigger.SetActive(true);
+
+
+            Destroy(this.gameObject);
+        }
+
+        // ===============================================
+        // 다른 방법 시도 후 삭제한 코드
         // void Update()
         // {
         //     theDistance = PlayerCasting.distanceFormTarget;
@@ -58,24 +83,10 @@ namespace MyFPS
         // {
         //     HideActionUI();
         // }
+        // ===============================================
 
-        protected override void DoAction()
-        {
-            realPistol.SetActive(true);
-            crossHair.SetActive(false);
-            pistolCross.SetActive(true);
-            arrow.SetActive(false);
-
-            //AmmoUi 활성화
-            ammoUi.SetActive(true);
-            ammoBox.SetActive(true);
-
-            //EnemyTrigger 활성화
-            enemyTrigger.SetActive(true);
-
-            Destroy(this.gameObject);
-        }
-
+        // ===============================================
+        // 다른 방법 시도 후 삭제한 코드
         // private void ShowActionUi()
         // {
         //     actionUI.SetActive(true);
@@ -89,6 +100,7 @@ namespace MyFPS
         //     actionText.text = "";
         //     extraCross.SetActive(false);
         // }
+        // ===============================================
     }
 
 }

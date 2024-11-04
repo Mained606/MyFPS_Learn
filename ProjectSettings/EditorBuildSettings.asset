@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/MyFPS/Scenes/MainMenu.unity
     guid: 8719e0cc4842fcb469a0c4859415b50b
   - enabled: 1
+    path: Assets/MyFPS/Scenes/Intro.unity
+    guid: d5cbece07da94644fae8aa70ebef9cbe
+  - enabled: 1
     path: Assets/MyFPS/Scenes/MainScene01.unity
     guid: c4e5b0fdb42a74246a51aaedf488f328
   - enabled: 1

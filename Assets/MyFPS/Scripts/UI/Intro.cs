@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
@@ -30,7 +28,6 @@ namespace MyFPS
             isArrive = new bool[7];
 
             StartCoroutine(StartIntro());
-
         }
 
         void Update()
@@ -119,10 +116,8 @@ namespace MyFPS
             theShedLight.SetActive(false);
             yield return new WaitForSeconds(2f);
 
-
             AudioManager.Instance.StopBgm();
             fader.FadeTo(loadToScene);
-
         }
 
         private void GoToMainScene()
@@ -131,5 +126,4 @@ namespace MyFPS
             fader.FadeTo(loadToScene);
         }
     }
-
 }

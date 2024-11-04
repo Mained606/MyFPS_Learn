@@ -7,17 +7,16 @@ namespace MyFPS
 {
     public class DOpening : MonoBehaviour
     {
+        #region Variables
         public SceneFader fader;
-
         public GameObject thePlayer;
         public TextMeshProUGUI textBox;
-
-        
-        
+        #endregion
 
         void Start ()
         {
             StartCoroutine(SequencePlay());
+            // 커서 잠금
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
@@ -38,8 +37,6 @@ namespace MyFPS
             fader.FromFade();
 
             thePlayer.GetComponent<FirstPersonController>().enabled = true;
-
         }
-
     }
 }

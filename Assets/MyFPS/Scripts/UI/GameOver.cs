@@ -6,8 +6,7 @@ namespace MyFPS
     {
         #region Variables
         public SceneFader fader;
-
-        [SerializeField] private string loadToScene = "PlayScene";
+        [SerializeField] private string loadToScene = "MainMenu";
         #endregion
 
         void Start()
@@ -23,13 +22,13 @@ namespace MyFPS
         {
             //탄약 수 초기화
             PlayerStats.Instance.ResetAmmo();
-            fader.FadeTo(loadToScene);
+            // 버그 수정 현재 진행중인 스테이지 번호로 재시도
+            fader.FadeTo(PlayerStats.Instance.CurrentScene);
         }
 
         public void Menu()
         {
-            Debug.Log("Goto Menu");
+            fader.FadeTo(loadToScene);
         }
     }
-
 }

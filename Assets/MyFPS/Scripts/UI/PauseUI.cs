@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using StarterAssets;
 
@@ -45,25 +43,25 @@ namespace MyFPS
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
                 Time.timeScale = 1;
-
             }
         }
 
         public void Menu()
         {
-            Time.timeScale = 1;
-
             //씬 종료 처리
+            Time.timeScale = 1;
+            fader.FadeTo(loadToScene);
+                
             // Debug.Log("메뉴로 이동");
             // AudioManager.Instance.StopBgm();
-            fader.FadeTo(loadToScene);
         }
 
         public void Contiune()
         {
             Toggle();
         }
-
+        
+        // ===============================================
         // 게임 매니저에 스크립트를 넣는 경우의 코드 (P로 퍼즈)
         //// 활성화시 마우스 락 해제 및 게임 일시정지
         //private void OnEnable()
@@ -96,6 +94,6 @@ namespace MyFPS
         //{
         //    Debug.Log("메인 메뉴로 이동");
         //}
+        // ===============================================
     }
-
 }

@@ -1,29 +1,17 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace MyFPS
 {
-
     public class CEnemyTrigger : MonoBehaviour
     {
         #region Variables
-
-   
         public GameObject theDoor; //문
-        public AudioSource doorBang; //문 열리는 소리
-
         public GameObject theRobot; //로봇
+        public AudioSource doorBang; //문 열리는 소리
         public AudioSource bgm01;
         public AudioSource bgm02; //점프 스크어 소리
-
-
         #endregion
-
-        private void Awake()
-        {
-        
-        }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -38,8 +26,6 @@ namespace MyFPS
             //문 열기
             theDoor.GetComponent<Animator>().SetBool("IsOpen", true);
             theDoor.GetComponent<BoxCollider>().enabled = false;
-
-
 
             //문 사운드
             bgm01.Stop();
@@ -65,5 +51,4 @@ namespace MyFPS
             yield return null;
         }
     }
-
 }

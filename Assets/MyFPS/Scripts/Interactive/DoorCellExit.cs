@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace MyFPS
@@ -15,7 +13,6 @@ namespace MyFPS
         public AudioSource creakyDoor;
 
         public AudioSource bgm01;
-
         #endregion
 
         void Start()
@@ -23,7 +20,6 @@ namespace MyFPS
             animator = GetComponent<Animator>();
             m_Collider = GetComponent<Collider>();
         }
-
 
         protected override void DoAction()
         {
@@ -39,15 +35,11 @@ namespace MyFPS
 
         void ChangeScene()
         {
-
             //씬 마무리,...
             bgm01.Stop();
 
             //다음 씬으로 이동...
             fader.FadeTo(loadToSecne);
         }
-
-
     }
-
 }

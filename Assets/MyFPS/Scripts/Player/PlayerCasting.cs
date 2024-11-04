@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 namespace MyFPS
@@ -6,15 +5,15 @@ namespace MyFPS
     //정면에 있는 충돌체와의 거리 구하기
     public class PlayerCasting : MonoBehaviour
     {
-
         #region Variables
-
-        // public GameObject doorUi;
         public static float distanceFormTarget = Mathf.Infinity;
         [SerializeField] private float toTarget; //거리 숫자 보기(임시)
 
+        // ===============================================
+        // 다른 방법 시도 후 삭제한 코드
+        // public GameObject doorUi;
         // public float health = 20f;
-
+        // ===============================================
         #endregion
 
 
@@ -26,6 +25,9 @@ namespace MyFPS
                 distanceFormTarget = hit.distance;
                 toTarget = distanceFormTarget;
             }
+            
+            // ===============================================
+            // 다른 방법 시도 후 삭제한 코드
             // if (hit.collider.tag == "Door" && distanceFormTarget < 2f)
             // {
             //     doorUi.SetActive(true);
@@ -34,9 +36,11 @@ namespace MyFPS
             // {
             //     doorUi.SetActive(false);
             // }
+            // ===============================================
         }
 
-
+        // ===============================================
+        // 다른 방법 시도 후 삭제한 코드
         // public void TakeDamage(float damage)
         // {
         //     health -= damage;
@@ -52,6 +56,7 @@ namespace MyFPS
         //     Destroy(gameObject);
         //     yield return null;
         // }
+        // ===============================================
 
         // Gizmo 그리기 : 카메라 위치에서 앞에 충돌체까지 레이저 쏘는 선 그리기
         void OnDrawGizmosSelected()
@@ -67,13 +72,11 @@ namespace MyFPS
             {
                 Gizmos.color = Color.red;
                 Gizmos.DrawRay(transform.position, transform.forward * hit.distance);
-
             }
             else
             {
                 Gizmos.color = Color.green;
                 Gizmos.DrawRay(transform.position, transform.forward * maxDistance);
-  
             }
         }
     }

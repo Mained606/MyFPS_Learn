@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using StarterAssets;
 using UnityEngine;
 
@@ -14,11 +13,9 @@ namespace MyFPS
 
         public void OnTriggerEnter(Collider other)
         {
-            
             // this.GetComponent<BoxCollider>().enabled = false;
             StartCoroutine(PlaySequence());
         }
-
 
         IEnumerator PlaySequence()
         {
@@ -31,14 +28,10 @@ namespace MyFPS
             // activateObject.SetActive(false);
             Destroy(activateObject, 2f);
 
-
             thePlayer.GetComponent<FirstPersonController>().enabled = true;
 
             //트리거 킬
             Destroy(this.gameObject);
-
-
         }
     }
-    
 }

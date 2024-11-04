@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace MyFPS
@@ -25,7 +23,7 @@ namespace MyFPS
             if(PlayerStats.Instance.HasPuzzleItem(PuzzleKey.LEFTEYE_KEY) && PlayerStats.Instance.HasPuzzleItem(PuzzleKey.RIGHTEYE_KEY))
             {
                 fakeWall.SetActive(false);
-                exitWall.SetActive(true);
+                exitWall.SetActive(true); // 모든 눈을 모았을 때 벽 변경
             }
         }
     }

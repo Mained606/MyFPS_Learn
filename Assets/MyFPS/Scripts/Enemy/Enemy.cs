@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -18,7 +16,7 @@ namespace MyFPS
         #region Variables
         private Transform thePlayer;
         private Animator animator;
-        private UnityEngine.AI.NavMeshAgent agent;
+        private NavMeshAgent agent;
 
         public EnemyState CurrentState { get; private set; }
         private EnemyState beforeState;
@@ -31,13 +29,13 @@ namespace MyFPS
         [SerializeField] private float attackRange = 1.5f;
         [SerializeField] private float attackDamage = 5f;
 
-        //패트롤
+        // 패트롤 포인트
         public Transform[] wayPoints;
         private int nowWayPoint = 0;
 
         private Vector3 startPosition;
 
-        //적 감지
+        // 적 감지
         private bool isAiming;
         public bool IsAiming
         {
@@ -49,6 +47,7 @@ namespace MyFPS
 
         void Start()
         {
+            // 컴포넌트 및 변수 초기화
             thePlayer = GameObject.Find("Player").transform;
             animator = GetComponent<Animator>();
             agent = GetComponent<NavMeshAgent>();
@@ -57,6 +56,7 @@ namespace MyFPS
             startPosition = transform.position;
             nowWayPoint = 0;
 
+            // 웨이포인트에 따라 초기 상태 설정
             if(wayPoints.Length > 0)
             {
                 SetState(EnemyState.E_Walk);
@@ -66,26 +66,29 @@ namespace MyFPS
             {
                 SetState(EnemyState.E_Idle);
             }
-            
         }
 
         void Update()
         {
             if(IsDeath)
                 return;
-            // Vector3 dir = thePlayer.transform.position - this.gameObject.transform.position;
 
             float distance = Vector3.Distance(thePlayer.transform.position, this.gameObject.transform.position);
 
+            // 추적 범위 내에 플레이어가 있으면 추적 상태로 변경
             if (chaseRange > 0)
             {
                 IsAiming = distance <= chaseRange;
             }
 
+            // 공격 범위 내에 플레이어가 있으면 공격 상태로 변경
             if (distance <= attackRange)
             {
                 SetState(EnemyState.E_Attack);
+                agent.SetDestination(this.transform.position);
             }
+
+            // 추적 범위 내에 플레이어가 있으면 추적 상태로 변경
             else if (chaseRange > 0)
             {
                 if(IsAiming)
@@ -94,21 +97,13 @@ namespace MyFPS
                 }
             }
 
-            //if(distance <= chaseRange)
-            //{
-            //    SetState(EnemyState.E_Chase);
-            //}
-            //else
-            //{
-            //    SetState(EnemyState.E_Walk);
-            //}
-
+            // 상태에 따른 동작 설정
             switch(CurrentState)
             {
                 case EnemyState.E_Idle:
                     break;
                 case EnemyState.E_Walk:
-                    //도착판정
+                    // 목적지 도착 여부 확인
                     if(agent.remainingDistance <= 0.2f)
                     {
                         if(wayPoints.Length > 0)
@@ -132,11 +127,13 @@ namespace MyFPS
                 case EnemyState.E_Death:
                     break;
                 case EnemyState.E_Chase:
-                    if(chaseRange > 0 && !IsAiming)
-                    {
-                        GoStartPosition();
-                        return;
-                    }
+
+                    // 트리거 사용하지 않고 범위에 플레이어가 들어올 때만 Chase 상태로 변경하도록 하는 코드
+                    // if(chaseRange > 0 && !IsAiming)
+                    // {
+                    //     GoStartPosition();
+                    //     return;
+                    // }
 
                     //플레이어 위치 업데이트
                     agent.SetDestination(thePlayer.position);
@@ -147,14 +144,12 @@ namespace MyFPS
 
         public void SetState(EnemyState newState)
         {
-            if(IsDeath)
+            if (IsDeath || CurrentState == newState)
                 return;
-            if(CurrentState == newState)
-                return;
-            //이전 상태 저장
+
             beforeState = CurrentState;
-            //현재 상태 저장
             CurrentState = newState;
+
             //애니메이션 상태 변경
             if(newState == EnemyState.E_Chase)
             {
@@ -167,7 +162,7 @@ namespace MyFPS
                 animator.SetLayerWeight(1, 0f);
             }
 
-            //Agent 초기화
+            // 에이전트 경로 초기화
             agent.ResetPath();
         }
 
@@ -193,13 +188,9 @@ namespace MyFPS
         private void Die()
         {
             SetState(EnemyState.E_Death);
-            
             IsDeath = true;
-
             transform.GetComponent<BoxCollider>().enabled = false;
-
-            //킬 효과
-            Destroy(this.gameObject, 3f);
+            Destroy(this.gameObject, 3f); // 3초 후 적 삭제
         }
 
         private void GoNextPoint()
@@ -218,7 +209,6 @@ namespace MyFPS
                 return;
 
             SetState(EnemyState.E_Walk);
-
             nowWayPoint = 0;
             agent.SetDestination(startPosition);
         }
@@ -228,7 +218,16 @@ namespace MyFPS
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, chaseRange);
         }
-
     }
-
 }
+// ==================================================================================
+// 트리거 사용하지 않고 범위에 플레이어가 들어올 때만 Chase 상태로 변경하도록 하는 코드
+// if(distance <= chaseRange)
+// {
+//    SetState(EnemyState.E_Chase);
+// }
+// else
+// {
+//    SetState(EnemyState.E_Walk);
+// }
+// ==================================================================================

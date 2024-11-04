@@ -1,4 +1,3 @@
-using MyFPS;
 using UnityEngine;
 
 namespace MyFPS
@@ -21,5 +20,4 @@ namespace MyFPS
         public AudioSource source; //음원을 재생할 오디오 소스
 
     }
-
 }

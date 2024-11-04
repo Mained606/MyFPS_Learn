@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 namespace MyFPS
 {
@@ -15,10 +12,7 @@ namespace MyFPS
         protected override void DoAction()
         {
             PlayerStats.Instance.AddAmmo(giveAmmoCount);
-            //킬
             Destroy(this.gameObject);
         }
-
     }
-
 }

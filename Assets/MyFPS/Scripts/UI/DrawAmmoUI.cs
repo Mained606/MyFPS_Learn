@@ -15,5 +15,4 @@ namespace MyFPS
             ammoCountText.text = PlayerStats.Instance.AmmoCount.ToString();
         }
     }
-
 }

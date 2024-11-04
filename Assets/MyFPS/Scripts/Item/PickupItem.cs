@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace MyFPS
@@ -7,7 +5,6 @@ namespace MyFPS
     public class PickupItem : MonoBehaviour
     {
         #region Variables
-        // [SerializeField] private int giveAmmoCount = 7;
         [SerializeField] private float verticalBobFrequency = 1f; //이동 속도
         [SerializeField] private float bobingAmount = 1f; //이동 거리
         [SerializeField] private float rotateSpeed = 360f;
@@ -48,11 +45,7 @@ namespace MyFPS
 
         protected virtual bool OnPickup()
         {
-            //아이템 획득
-            // PlayerStats.Instance.AddAmmo(giveAmmoCount);
-
             return true;
         }
     }
-
 }

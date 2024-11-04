@@ -15,5 +15,4 @@ namespace MyFPS
             return true;
         }
     }
-
 }

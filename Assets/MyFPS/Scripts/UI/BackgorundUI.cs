@@ -1,15 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 
 namespace MyFPS
 {
     public class BackgorundUI : MonoBehaviour
     {
+        #region Variables
         public GameObject[] images;
-
         private int previousAmmoCount = -1;
+        #endregion
 
         void Update()
         {
@@ -33,8 +31,6 @@ namespace MyFPS
                 //이전 탄약 수 업데이트
                 previousAmmoCount = ammoCount;
             }
-
         }
     }
-
 }

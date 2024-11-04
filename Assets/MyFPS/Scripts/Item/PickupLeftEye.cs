@@ -11,12 +11,9 @@ namespace MyFPS
         public GameObject puzzileUI;
         public Image itemImage;
         public TextMeshProUGUI puzzleText;
-
         public GameObject puzzleItemGp;
-
         public Sprite itemSprite; //획득한 아이템 아이콘
         [SerializeField] private string puzzleStr = "Puzzle Text"; //아이템 획득 안내 텍스트
-
         #endregion
         protected override void DoAction()
         {
@@ -40,10 +37,8 @@ namespace MyFPS
                 yield return new WaitForSeconds(2f);
                 puzzileUI.SetActive(false);
             }
-
             //킬
             Destroy(this.gameObject);
         }
-
     }
 }

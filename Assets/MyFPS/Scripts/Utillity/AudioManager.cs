@@ -3,7 +3,7 @@ using UnityEngine.Audio;
 
 namespace MyFPS
 {
-    public class AudioManager : PersistentSingleton<AudioManager>
+    public class AudioManager : Singleton<AudioManager>
     {
         #region Variables
         public Sound[] sounds;
@@ -14,7 +14,6 @@ namespace MyFPS
         }
 
         public AudioMixer audioMixer;
-
         #endregion
 
         protected override void Awake()
@@ -43,7 +42,6 @@ namespace MyFPS
                 {
                     sound.source.outputAudioMixerGroup = audioMixerGroups[2];
                 }
-                
             }
         }
 

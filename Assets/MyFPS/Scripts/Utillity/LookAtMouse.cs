@@ -6,13 +6,11 @@ namespace MyFPS
     {
         #region Variables
         [SerializeField] private Vector3 worldPosition;
-
         #endregion
 
         void Update()
         {
             worldPosition = ScreenToWorld();
-
             transform.LookAt(worldPosition);
         }
 
@@ -24,7 +22,6 @@ namespace MyFPS
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
 
             return worldPos;
-
         }
 
         Vector3 RayToWorld()
@@ -43,5 +40,4 @@ namespace MyFPS
             return worldPos;
         }
     }
-
 }

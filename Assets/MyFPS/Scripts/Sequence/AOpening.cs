@@ -13,13 +13,12 @@ namespace MyFPS
 
         //시퀀스 UI
         [SerializeField] private TextMeshProUGUI textBox;
-        [SerializeField] private string scenarioText1 = "...Where am I?";
-        [SerializeField] private string scenarioText2 = "I need get out of here...";
+        [SerializeField] private string scenarioText1 = "...음 여기가 어디지?";
+        [SerializeField] private string scenarioText2 = "어서 여기서 빠져나가야 해...";
 
         //시나리오 보이스
         public AudioSource voice1;
         public AudioSource voice2;
-
         #endregion
         void Start()
         {
@@ -54,8 +53,6 @@ namespace MyFPS
 
             // 5. 플레이어 캐릭터 활성화
             thePlayer.GetComponent<FirstPersonController>().enabled = true;
-
         }
     }
-
 }

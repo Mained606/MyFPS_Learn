@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace MyFPS
@@ -10,6 +8,7 @@ namespace MyFPS
         public SceneFader fader;
         [SerializeField] private string loadToScene = "MainMenu";
         #endregion
+
         private void OnTriggerEnter(Collider other)
         {
             if(other.tag == "Player")
@@ -33,5 +32,4 @@ namespace MyFPS
             fader.FadeTo(loadToScene);
         }
     }
-
 }

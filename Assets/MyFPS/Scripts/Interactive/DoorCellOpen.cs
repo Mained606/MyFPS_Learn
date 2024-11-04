@@ -1,11 +1,13 @@
 using UnityEngine;
-using TMPro;
 
 namespace MyFPS
 {
     public class DoorCellOpen : Interactive
     {
         #region Variables
+        
+        //===============================================
+        // 다른 방법 시도 후 삭제된 코드
         // private float theDistance;
 
         //action UI
@@ -14,11 +16,13 @@ namespace MyFPS
         // public GameObject extraCross;
         // [SerializeField] private string action = "Press E to Open";
 
+        // private bool isOpen = false;
+        //===============================================
+
         //action
         private Animator animator;
         private Collider m_collide;
         public AudioSource audioSource;
-        // private bool isOpen = false;
         #endregion
   
         void Start()
@@ -27,6 +31,15 @@ namespace MyFPS
             m_collide = GetComponent<Collider>();
         }
 
+        protected override void DoAction()
+        {
+            animator.SetBool("isOpen", true);
+            m_collide.enabled = false;
+            audioSource.Play();
+        }
+
+        // ===============================================
+        // 다른 방법 시도 후 삭제된 코드
         // void Update()
         // {
         //     //플레이어와 문의 거리를 계산
@@ -37,8 +50,8 @@ namespace MyFPS
         //     // {
         //     //     OpenDoor();
         //     // }
-
         // }
+
         //마우스를 가져가면 액션 UI를 보여준다
         // private void OnMouseOver()
         // {
@@ -73,14 +86,8 @@ namespace MyFPS
         // {
         //     HideActionUI();
         // }
-
-        protected override void DoAction()
-        {
-            animator.SetBool("isOpen", true);
-            m_collide.enabled = false;
-            audioSource.Play();
-        }
-
+        // ===============================================
+        // 다른 방법 시도 후 삭제된 코드
         // private void ShowActionUi()
         // {
         //     actionUi.SetActive(true);
@@ -115,5 +122,6 @@ namespace MyFPS
         //     collide.enabled = true;
         //     isOpen = false;
         // }
+        // ===============================================
     }
 }

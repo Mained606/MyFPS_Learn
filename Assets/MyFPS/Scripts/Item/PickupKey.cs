@@ -1,12 +1,13 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+
 namespace MyFPS
 {
     public class PickupKey : PickupItem
     {
+        #region Variables
         public GameObject hiddenKeyUI;
         public GameObject hiddenKeyGp;
         public GameObject puzzileUI;
@@ -18,7 +19,7 @@ namespace MyFPS
         [SerializeField] private PuzzleKey puzzleKey;
         public Sprite itemSprite; //획득한 아이템 아이콘
         [SerializeField] private string puzzleStr = "Puzzle Text"; //아이템 획득 안내 텍스트
-
+        #endregion
 
         protected override void OnTriggerEnter(Collider other)
         {
@@ -49,7 +50,6 @@ namespace MyFPS
 
             //첫 번째 방 키 획득
             StartCoroutine(GainPuzzleItem());
-
             return true;
         }
 
@@ -64,6 +64,7 @@ namespace MyFPS
                 puzzleItemGp.SetActive(false);
 
                 puzzileUI.SetActive(true);
+
                 //아이템 이미지 크기 변경
                 itemImage.rectTransform.sizeDelta = new Vector2(300f, 100f);
                 itemImage.sprite = itemSprite;
@@ -77,7 +78,6 @@ namespace MyFPS
                 //아이템 이미지 기본 사이즈로 초기화
                 itemImage.rectTransform.sizeDelta = new Vector2(100f, 200f);
             }
-
         }
     }
 }

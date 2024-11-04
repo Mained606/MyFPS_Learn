@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace MyFPS
@@ -18,10 +17,18 @@ namespace MyFPS
         public AudioSource hurt01;
         public AudioSource hurt02;
         public AudioSource hurt03;
+
+        //무기
+        public GameObject realPistol;
         #endregion
+        
         void Awake()
         {
             currentHealth = maxHealth;
+            if(PlayerStats.Instance.HasWeapon)
+            {
+                realPistol.SetActive(true);
+            }
         }
 
 
@@ -50,6 +57,7 @@ namespace MyFPS
         {
             //데미지 효과
             damageFlash.SetActive(true);
+            CinemachineShake.Instance.ShakeCamera(1f, 1f);
             
             int randNumber = Random.Range(1, 4);
             if(randNumber == 1)

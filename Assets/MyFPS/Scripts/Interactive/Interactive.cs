@@ -18,10 +18,8 @@ namespace MyFPS
         public GameObject crossHair;
         public GameObject pistolCross;
 
-        //
         protected bool unInteractive = false;
         #endregion
-        // 공통 메서드
 
         void Update()
         {
@@ -41,9 +39,7 @@ namespace MyFPS
 
                     //액션
                     DoAction();
-
                 }
-
             }
             else
             {

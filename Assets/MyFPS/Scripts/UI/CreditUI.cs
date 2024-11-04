@@ -15,11 +15,11 @@ namespace MyFPS
                 HideCredits();
             }
         }
+
         private void HideCredits()
         {
             mainMenu.SetActive(true);
             this.gameObject.SetActive(false);
         }
     }
-
 }

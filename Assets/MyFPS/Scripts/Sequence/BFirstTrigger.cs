@@ -28,11 +28,14 @@ namespace MyFPS
         {
             StartCoroutine(PlaySequence());
 
+            // ===============================================
+            // 다른 방법 시도 후 삭제한 코드
             // //한 번만 실행되도록 실행중인지 체크
             // if(!isTrigger)
             // {
             //     StartCoroutine(PlaySequence());
             // }
+            // ===============================================
         }
 
         IEnumerator PlaySequence()
@@ -71,8 +74,6 @@ namespace MyFPS
 
             //플레이 캐릭터 활성화(다시 플레이)
             //thePlayer.gameObject.SetActive(true);
-
-
         }
     }
 }
